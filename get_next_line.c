@@ -1,119 +1,127 @@
 #include "get_next_line.h"
 
-char    *get_next_line(int fd)
+char	*ft_read_and_save(int fd, char *save)
 {
-    char        *line;
-    static char *buffer;
+	char	*buffer;
+	int	bytes;
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
-        return (NULL);
-    buffer = ft_read(fd, buffer);
-    if (!buffer)
-        return (NULL);
-    line = ft_line(buffer);
-    buffer = ft_buffer(buffer);
-    return (line);
-}
-
-char    *ft_read(int fd, char *buffer)
-{
-    char    *buf;
-    int     read_bytes;
-
-    buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    if (!buf)
-        return (NULL);
-    read_bytes = 1;
-    while (!ft_strchr(buffer, '\n') && read_bytes != 0)
-    {
-        read_bytes = read(fd, buf, BUFFER_SIZE);
-        if (read_bytes == -1)
-        {
-            free(buf);
-            return (NULL);
-        }
-        buf[read_bytes] = '\0';
-        buffer = ft_strjoin(buffer, buf);
-    }
-    free(buf);
-    return (buffer);
-    
-}
-
-char    *ft_line(char *buffer)
-{
-    char    *line;
-    int     i;
-
-    i = 0;
-    while (buffer[i] != '\n' && buffer[i] != '\0')
-        i++;
-    line = malloc(sizeof(char) * (i + 1));
-    if (!line)
-        return (NULL);
-    i = 0;
-    while (buffer[i] != '\n' && buffer[i] != '\0')
-    {
-        line[i] = buffer[i];
-        i++;
-    }
-    line[i] = '\0';
-    return (line);
-}
-
-char    *ft_buffer(char *buffer)
-{
-    char    *temp;
-    int     i;
-    int     j;
-
-    i = 0;
-    while (buffer[i] != '\n' && buffer[i] != '\0')
-        i++;
-    if (buffer[i] == '\0')
-    {
-        free(buffer);
-        return (NULL);
-    }
-    temp = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
-    if (!temp)
-        return (NULL);
-    i++;
-    j = 0;
-    while (buffer[i] != '\0')
-        temp[j++] = buffer[i++];
-    temp[j] = '\0';
-    free(buffer);
-    return (temp);
-}
-
-/*int	main(void)
-{
-	char	*line;
-	int		i;
-	int		fd1;
-	int		fd2;
-	int		fd3;
-
-	fd1 = open("tests/test.txt", O_RDONLY);
-	fd2 = open("tests/test2.txt", O_RDONLY);
-	fd3 = open("tests/test3.txt", O_RDONLY);
-	i = 1;
-	while (i < 7)
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	bytes = 1;
+	while (!ft_strch(save, '\n') && bytes != 0);
 	{
-		line = get_next_line(fd1);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd2);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd3);
-		printf("line [%02d]: %s", i, line);
-		free(line);
+		bytes = read(fd, buffer, BUFFER_SIZE);
+		if (bytes == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[bytes] = '\0';
+		save = ft_strjoin(save, buffer);
+	}
+	free(buffer);
+	return (save);
+}
+
+char	*read_line(char *save)
+{
+	int	i;
+	char	*temp;
+
+	i = 0;
+	if (save[i] == '\0')
+		return (NULL);
+	while (save[i] && save[i] != '\n')
+		i++;
+	temp = malloc((i + 2) * sizeof(char));
+	if (!temp)
+		return (NULL);
+	i = 0;
+	while (save[i] && save[i] != '\n')
+	{
+		temp[i] = save[i];
 		i++;
 	}
-	close(fd1);
-	close(fd2);
-	close(fd3);
-	return (0);
-}*/
+	if (save[i] == '\n')
+	{
+		temp[i] = save[i];
+		i++;
+	}
+	temp[i] = '\0';
+	return (temp);
+}
+
+char	*new_save(char *save)
+{
+	int	i;
+	int	index;
+	char	*new;
+
+	index = 0;
+	while (save[index] && save[index] != '\n')
+		index++;
+	if (save[index] == '\0')
+	{
+		free(save);
+		return (NULL);
+	}
+	new = malloc((ft_strlen(save) - index + 1) * sizeof(char));
+	if (!new)
+		return (NULL);
+	index++;
+	i = 0;
+	whlie (save[index])
+		new[i++] = save[index++];
+	new[i] = '\0';
+	free(save);
+	return (new);
+}
+
+char    *get_next_line(int fd)
+{
+	char		*line;
+	static char	*save;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	save = ft_read_and_save(fd, save);
+	if (!save)
+		return (NULL);
+	line = read_line(save);
+	save = new_save(save);
+	return (line);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

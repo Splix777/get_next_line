@@ -45,7 +45,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s1));
 	if (!s1 && s2)
 		return (ft_strdup(s2));
-	s1_len = ft_strlen((char *)s1);
+	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	total_len = s1_len + s2_len + 1;
 	joined = malloc(sizeof(char) * total_len);

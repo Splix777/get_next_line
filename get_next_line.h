@@ -4,14 +4,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
-# endif
-
 char    *get_next_line(int fd);
-char    *ft_read(int fd, char *buffer);
-char    *ft_line(char *buffer);
-char    *ft_buffer(char *buffer);
+char    *ft_read_and_save(int fd, char *save);
+char    *read_line(char *save);
+char    *new_line(char *save);
 char    *ft_strdup(const char *s1);
 char    *ft_strchr(const char *s, int c);
 char    *ft_strjoin(char const *s1, char const *s2);
