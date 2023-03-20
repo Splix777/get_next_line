@@ -81,14 +81,14 @@ char	*new_save(char *save)
 char    *get_next_line(int fd)
 {
 	char		*line;
-	static char	*save;
+	static char	*save[257];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 256)
 		return (0);
-	save = ft_read_and_save(fd, save);
-	if (!save)
+	save = ft_read_and_save(fd, save[fd]);
+	if (!save[fd])
 		return (NULL);
-	line = read_line(save);
-	save = new_save(save);
+	line = read_line(save[fd]);
+	save[fd] = new_save(save[fd]);
 	return (line);
 }
