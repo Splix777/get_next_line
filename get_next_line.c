@@ -9,7 +9,7 @@ char	*ft_read_and_save(int fd, char *save)
 	if (!buffer)
 		return (NULL);
 	bytes = 1;
-	while (!ft_strchr(save, '\n') && bytes > 0)
+	while (!ft_strchr(save, '\n') && bytes != 0)
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
@@ -78,7 +78,7 @@ char	*new_save(char *save)
 	return (new);
 }
 
-char    *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*save;
@@ -89,11 +89,6 @@ char    *get_next_line(int fd)
 	if (!save)
 		return (NULL);
 	line = read_line(save);
-	if (!line && save)
-	{
-		free(save);
-		return (NULL);
-	}
 	save = new_save(save);
 	return (line);
 }

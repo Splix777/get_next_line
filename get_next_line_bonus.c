@@ -78,7 +78,7 @@ char	*new_save(char *save)
 	return (new);
 }
 
-char    *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*save[257];
@@ -89,11 +89,6 @@ char    *get_next_line(int fd)
 	if (!save[fd])
 		return (NULL);
 	line = read_line(save[fd]);
-	if (!line && save)
-	{
-		free(save[fd]);
-		return (NULL);
-	}
 	save[fd] = new_save(save[fd]);
 	return (line);
 }
