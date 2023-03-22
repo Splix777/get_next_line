@@ -30,7 +30,7 @@ char	*read_line(char *save)
 	char	*temp;
 
 	i = 0;
-	if (save[i] == '\0')
+	if (save[i] == '\0' || !save)
 		return (NULL);
 	while (save[i] && save[i] != '\n')
 		i++;
@@ -84,7 +84,7 @@ char	*get_next_line(int fd)
 	static char	*save;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
+		return (NULL);
 	save = ft_read_and_save(fd, save);
 	if (!save)
 		return (NULL);
