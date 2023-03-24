@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fsalazar <fsalazar@student.42madrid.com:>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/24 13:02:23 by fsalazar          #+#    #+#             */
+/*   Updated: 2023/03/24 13:03:53 by fsalazar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_read_and_save(int fd, char *save)
 {
 	char	*buffer;
-	int	bytes;
+	int		bytes;
 
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
@@ -26,7 +38,7 @@ char	*ft_read_and_save(int fd, char *save)
 
 char	*read_line(char *save)
 {
-	int	i;
+	int		i;
 	char	*temp;
 
 	i = 0;
@@ -54,8 +66,8 @@ char	*read_line(char *save)
 
 char	*new_save(char *save)
 {
-	int	i;
-	int	index;
+	int		i;
+	int		index;
 	char	*new;
 
 	index = 0;
