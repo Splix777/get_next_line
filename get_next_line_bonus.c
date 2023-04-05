@@ -94,7 +94,7 @@ char	*new_save(char *save)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*save[257];
+	static char	*save[256];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 256)
 		return (NULL);
