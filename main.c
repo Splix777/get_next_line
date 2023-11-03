@@ -21,7 +21,13 @@ int main(int argc, char **argv)
             i++;
             line = get_next_line(fd1);
         }
-        line = get_next_line(fd1);
+        for (int i = 0; i < 5; i++)
+        {
+            line = get_next_line(fd1);
+            printf("line [%02d]: %s", i, line);
+            free(line);
+            printf("%s", "\n");
+        }
         close (fd1);
     }
     else
