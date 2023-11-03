@@ -46,7 +46,9 @@ char	*read_line(char *save)
 		return (free_and_return_null(save));
 	while (save[i] && save[i] != '\n')
 		i++;
-	temp = malloc((i + 2) * sizeof(char));
+	if (save[i] == '\n')
+		i++;
+	temp = malloc((i + 1) * sizeof(char));
 	if (!temp)
 		return (free_and_return_null(save));
 	i = 0;
