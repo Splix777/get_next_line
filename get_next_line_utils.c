@@ -67,3 +67,10 @@ size_t	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
+char	*free_and_return(char *save)
+{
+	if (save)
+		free(save);
+	return (NULL);
+}

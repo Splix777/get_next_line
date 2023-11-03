@@ -19,7 +19,7 @@ char	*ft_read_and_save(int fd, char *save)
 
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
-		return (NULL);
+		return (free_and_return_null(save));
 	bytes = 1;
 	while (!ft_strchr(save, '\n') && bytes != 0)
 	{
@@ -27,8 +27,7 @@ char	*ft_read_and_save(int fd, char *save)
 		if (bytes == -1)
 		{
 			free(buffer);
-			free(save);
-			return (NULL);
+			return (free_and_return_null(save));
 		}
 		buffer[bytes] = '\0';
 		save = ft_strjoin(save, buffer);
@@ -44,12 +43,12 @@ char	*read_line(char *save)
 
 	i = 0;
 	if (save[i] == '\0' || !save)
-		return (NULL);
+		return (free_and_return_null(save));
 	while (save[i] && save[i] != '\n')
 		i++;
 	temp = malloc((i + 2) * sizeof(char));
 	if (!temp)
-		return (NULL);
+		return (free_and_return_null(save));
 	i = 0;
 	while (save[i] && save[i] != '\n')
 	{
@@ -75,13 +74,10 @@ char	*new_save(char *save)
 	while (save[index] && save[index] != '\n')
 		index++;
 	if (save[index] == '\0')
-	{
-		free(save);
-		return (NULL);
-	}
+		return (free_and_return_null(save));
 	new = malloc((ft_strlen(save) - index + 1) * sizeof(char));
 	if (!new)
-		return (NULL);
+		return (free_and_return_null(save));
 	index++;
 	i = 0;
 	while (save[index])

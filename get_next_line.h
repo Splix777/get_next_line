@@ -28,6 +28,7 @@ char	*new_line(char *save);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 char	*ft_strchr(char *str, char c);
+char    *free_and_return_null(char *save);
 
 size_t	ft_strlen(char *str);
 
