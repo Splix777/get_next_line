@@ -24,7 +24,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	joined = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!joined)
-		return (free_and_return_null(s1));
+		free_and_return_null(s1);
 	index = 0;
 	i = 0;
 	while (s1[i] != '\0')
@@ -62,13 +62,11 @@ char	*ft_strdup(char *s1)
 	int		i;
 
 	i = 0;
-	if (!s1)
-		return (NULL);
 	len = ft_strlen(s1);
 	rtn = malloc(sizeof(char) * len + 1);
 	if (!rtn)
 		return (NULL);
-	while (s1)
+	while (s1[i])
 	{
 		rtn[i] = s1[i];
 		i++;
@@ -79,8 +77,9 @@ char	*ft_strdup(char *s1)
 
 char	*free_and_return_null(char *save)
 {
-	if (save)
-		free(save);
+	if (!save)
+		return (NULL);
+	free(save);
 	return (NULL);
 }
 

@@ -13,9 +13,15 @@ int main(int argc, char **argv)
     {
         fd1 = open (argv[1], O_RDONLY);
         line = get_next_line(fd1);
-        printf("line [%02d]: %s", i, line);
-        printf("%s", "\n");
-        free(line);
+        while (line)
+        {
+            printf("line [%02d]: %s", i, line);
+            free(line);
+            printf("%s", "\n");
+            i++;
+            line = get_next_line(fd1);
+        }
+        line = get_next_line(fd1);
         close (fd1);
     }
     else

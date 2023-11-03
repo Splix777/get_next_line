@@ -43,7 +43,7 @@ char	*read_line(char *save)
 
 	i = 0;
 	if (save[i] == '\0' || !save)
-		return (free_and_return_null(save));
+		return (NULL);
 	while (save[i] && save[i] != '\n')
 		i++;
 	if (save[i] == '\n')
