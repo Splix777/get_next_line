@@ -77,9 +77,8 @@ char	*ft_strdup(char *s1)
 
 char	*free_and_return_null(char *save)
 {
-	if (!save)
-		return (NULL);
-	free(save);
+	if (save)
+		free(save);
 	return (NULL);
 }
 
