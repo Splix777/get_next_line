@@ -14,9 +14,9 @@
 
 char	*ft_strjoin(char *s1, char *s2)
 {
+	char	*joined;
 	size_t	index;
 	size_t	i;
-	char	*joined;
 
 	if (!s1)
 		s1 = ft_strdup("");
